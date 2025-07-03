@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Captioning AI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px #444;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease;
+    }
+
+    form:hover {
+      transform: scale(1.02);
+    }
+
+    input[type="file"] {
+      background: #fff;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      border: none;
+      font-size: 1em;
+    }
+
+    input[type="submit"] {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #e63946;
+    }
+
+    .caption-section {
+      margin-top: 40px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .caption-section p {
+      font-size: 1.3em;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px 25px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-top: 10px;
+      color: #fff;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      form {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🖼️ Image Captioning AI</h1>
+
+  <form action="/" method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required>
+    <br>
+    <input type="submit" value="Generate Caption">
+  </form>
+
+  {% if caption %}
+    <div class="caption-section">
+      <h2>🧠 Generated Caption:</h2>
+      <p>{{ caption }}</p>
+      <img src="{{ url_for('static', filename='uploaded_image.jpg') }}" alt="Uploaded Image">
+    </div>
+  {% endif %}
+
+</body>
+</html>
